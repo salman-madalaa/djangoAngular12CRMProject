@@ -1,0 +1,44 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="btn btn-outline-primary" title="New Customer" routerLink="/customers/new"><i class="fas fa-user-plus"></i> </span>
+    <span class="navbar-brand mb-0 h1" style="color:rgb(55, 138, 194)">All Customers</span>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="table-responsive">
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Address</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <th scope="row">{{customer.id}}</th>
+        <td>{{customer.name}}</td>
+        <td>{{customer.type}}</td>
+        <td>{{customer.phone}}</td>
+        <td>{{customer.address}}</td>
+        <td>
+          <!-- <button type="button" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i></button> &nbsp;&nbsp;&nbsp;
+          <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button> -->
+          <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" routerLink="/customer/edit" ><i class="fas fa-user-edit" ></i></span>
+          <span style="color:red;cursor: pointer;" title="Delete" ><i class="fas fa-trash" ></i></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Scrollable modal -->
+<div class="modal-dialog modal-dialog-scrollable">
+  ...
+</div>

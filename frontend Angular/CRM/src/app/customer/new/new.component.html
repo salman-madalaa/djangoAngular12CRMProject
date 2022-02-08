@@ -1,0 +1,32 @@
+<h1 style="text-align: center;">New Customer</h1>
+
+<div class="container">
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Name</span>
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="customer.name">
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Type</label>
+      <select class="form-select" id="inputGroupSelect01" [(ngModel)]="customer.type">
+        <option selected>Choose...</option>
+        <option value="WHOLESALE">Wholesale</option>
+        <option value="RETAILER">Retailer</option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">phone</span>
+      <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="customer.phone"
+        aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Address</span>
+      <textarea class="form-control" aria-label="With textarea" placeholder="Address" [(ngModel)]="customer.address"></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-primary" style="display:flex;justify-content: center;" (click)="create(customer)">Submit</button>
+
+</div>
