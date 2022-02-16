@@ -1,1 +1,26 @@
-<p>new works!</p>
+<h1 style="text-align: center;">New Product</h1>
+
+<div class="container">
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">name</span>
+    <input type="text" class="form-control" placeholder="name" [(ngModel)]="product.name"
+      aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">price</span>
+    <input type="text" class="form-control" placeholder="price" [(ngModel)]="product.price"
+      aria-describedby="basic-addon1">
+  </div>
+
+  <div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect01">units</label>
+    <input type="text" class="form-control" placeholder="units" [(ngModel)]="product.units">
+  </div>
+
+  <br>
+  <button type="submit" class="btn btn-outline-primary" style="display:flex;justify-content: center;"
+    (click)="create(product)">Submit</button>
+
+</div>

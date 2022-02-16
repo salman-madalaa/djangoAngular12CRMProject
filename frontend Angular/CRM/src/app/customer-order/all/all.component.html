@@ -1,1 +1,90 @@
-<p>all works!</p>
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="btn btn-outline-primary" title="New Customer" routerLink="/customerOrder/new"><i
+          class="fas fa-user-plus"></i> </span>
+      <span class="navbar-brand mb-0 h1" style="color:rgb(55, 138, 194)">All Customers Orders</span>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="table-responsive">
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th scope="col">CustomerName</th>
+          <th scope="col">OrderDate</th>
+          <th scope="col">Contact_phone</th>
+          <th scope="col">OrderTotal</th>
+          <th scope="col">Created</th>
+          <th scope="col">Updated</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customerOrder of customerOrders;let i = index">
+          <th scope="row">
+            <div *ngIf="!customerOrder.isEdit">
+              <span *ngFor = " let customer of customers ">
+                <span *ngIf = " customer.id ==  customerOrder.customerId"> {{customer.name}}</span> 
+              </span>
+            </div>
+            <div *ngIf="customerOrder.isEdit">
+              <select class="form-select" id="inputGroupSelect01" [(ngModel)]="newCustomerOrder.customerId">
+                <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+            </select>
+            </div>
+
+          </th>
+          <td>
+            <div *ngIf="!customerOrder.isEdit">{{customerOrder.orderDate | date:'dd-MM-YYYY'}}</div>
+            <div *ngIf="customerOrder.isEdit">
+              <input type="date" name="name" placeholder="orderDate"  class="form-control" [(ngModel)]="newCustomerOrder.orderDate">
+            </div>
+          </td>
+  
+          <td>
+            <div *ngIf="!customerOrder.isEdit">{{customerOrder.contact_phone}}</div>
+            <div *ngIf="customerOrder.isEdit">
+              <input type="text" name="name"  placeholder="contact_phone" class="form-control" [(ngModel)]="newCustomerOrder.contact_phone">
+            </div>
+          </td>
+  
+          <td>
+            <div *ngIf="!customerOrder.isEdit">{{customerOrder.orderTotal}}</div>
+            <div *ngIf="customerOrder.isEdit">
+              <input type="text" name="phone"  placeholder="orderTotal" class="form-control" [(ngModel)]="newCustomerOrder.orderTotal">
+            </div>
+          </td>
+  
+          <td>
+            <div>{{customerOrder.created}}</div>
+          </td>
+          <td>
+            <div>{{customerOrder.updated}}</div>
+          </td>
+  
+          <td>
+            <!-- <button type="button" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i></button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button> -->
+  
+            <div *ngIf="customerOrder.isEdit">
+              <span style="color: blue;margin-right:20px;cursor: pointer;" title="Save" (click)="save(newCustomerOrder,customerOrder.id)"><i
+                  class="fas fa-check"></i></span>
+              <span style="color:red;cursor: pointer;" title="Cancel" (click)="cancel(customerOrder)"><i
+                  class="fas fa-times"></i></span>
+            </div>
+  
+            <div *ngIf="!customerOrder.isEdit">
+              <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" (click)="update(customerOrder)"><i
+                  class="fas fa-user-edit"></i></span>
+              <span style="color:red;cursor: pointer;" title="Delete" (click)="delete(customerOrder.id)"><i class="fas fa-trash"></i></span>
+            </div>
+  
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

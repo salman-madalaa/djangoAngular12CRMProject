@@ -1,1 +1,32 @@
-<p>new works!</p>
+<h1 style="text-align: center;">New customerOrder</h1>
+
+<div class="container">
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Customer</span>
+      <select class="form-select" id="inputGroupSelect01" [(ngModel)]="customerOrder.customerId">
+          <option value="" [selected]="true">Choose...</option>
+          <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">orderDate</label>
+      <input type="date" class="form-control" placeholder="Name" [(ngModel)]="customerOrder.orderDate">
+     
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">phone</span>
+      <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="customerOrder.contact_phone"
+        aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Total</span>
+      <textarea class="form-control" aria-label="With textarea" placeholder="Total" [(ngModel)]="customerOrder.orderTotal"></textarea>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-primary" style="display:flex;justify-content: center;" (click)="create(customerOrder)">Submit</button>
+
+</div>

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <span class="btn btn-outline-primary" title="New Customer" routerLink="/customers/new"><i class="fas fa-user-plus"></i> </span>
+    <span class="btn btn-outline-primary" title="New Customer" routerLink="/customers/new"><i
+        class="fas fa-user-plus"></i> </span>
     <span class="navbar-brand mb-0 h1" style="color:rgb(55, 138, 194)">All Customers</span>
     <form class="d-flex">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -21,24 +22,59 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customers">
+      <tr *ngFor="let customer of customers;let i = index">
         <th scope="row">{{customer.id}}</th>
-        <td>{{customer.name}}</td>
-        <td>{{customer.type}}</td>
-        <td>{{customer.phone}}</td>
-        <td>{{customer.address}}</td>
+        <td>
+          <div *ngIf="!customer.isEdit">{{customer.name}}</div>
+          <div *ngIf="customer.isEdit">
+            <input type="text" name="name" id="" placeholder="name" class="form-control" [(ngModel)]="newCustomer.name">
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!customer.isEdit">{{customer.type}}</div>
+          <div *ngIf="customer.isEdit">
+            <select class="form-select" id="inputGroupSelect01" [(ngModel)]="newCustomer.type" name="type">
+              <option selected>Choose...</option>
+              <option value="WHOLESALE">WHOLESALE</option>
+              <option value="RETAILER">RETAILER</option>
+            </select>
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!customer.isEdit">{{customer.phone}}</div>
+          <div *ngIf="customer.isEdit">
+            <input type="text" name="phone" id="" placeholder="name" class="form-control" [(ngModel)]="newCustomer.phone">
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!customer.isEdit">{{customer.address}}</div>
+          <div *ngIf="customer.isEdit">
+            <input type="text" name="address" id="" placeholder="name" class="form-control" [(ngModel)]="newCustomer.address">
+          </div>
+        </td>
+
         <td>
           <!-- <button type="button" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i></button> &nbsp;&nbsp;&nbsp;
           <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash"></i></button> -->
-          <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" routerLink="/customer/edit" ><i class="fas fa-user-edit" ></i></span>
-          <span style="color:red;cursor: pointer;" title="Delete" ><i class="fas fa-trash" ></i></span>
+
+          <div *ngIf="customer.isEdit">
+            <span style="color: blue;margin-right:20px;cursor: pointer;" title="Save" (click)="save(newCustomer,customer.id)"><i
+                class="fas fa-check"></i></span>
+            <span style="color:red;cursor: pointer;" title="Cancel" (click)="cancel(customer)"><i
+                class="fas fa-times"></i></span>
+          </div>
+
+          <div *ngIf="!customer.isEdit">
+            <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" (click)="update(customer)"><i
+                class="fas fa-user-edit"></i></span>
+            <span style="color:red;cursor: pointer;" title="Delete" (click)="delete(customer.id)"><i class="fas fa-trash"></i></span>
+          </div>
+
         </td>
       </tr>
     </tbody>
   </table>
-</div>
-
-<!-- Scrollable modal -->
-<div class="modal-dialog modal-dialog-scrollable">
-  ...
 </div>

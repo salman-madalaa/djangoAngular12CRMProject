@@ -21,7 +21,18 @@ export class CustomerService {
     let body = JSON.stringify(ob);
     let options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
     console.log(body);
-    return this.http.post<any>(this.baseUrl + "customer/new/" ,ob)
+    return this.http.post<any>(this.baseUrl + "customer/new/",ob)
+  }
+
+  update(ob:any,id:number):Observable<any>{
+    let body = JSON.stringify(ob);
+    let options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+    console.log(body);
+    return this.http.post<any>(this.baseUrl + "customer/update/"+id,ob)
+  }
+
+  delete(id:number):Observable<any>{
+    return this.http.delete(this.baseUrl + 'customer/delete/'+id)
   }
 
 }

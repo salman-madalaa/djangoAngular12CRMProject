@@ -1,13 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http.response import HttpResponse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-
-
+from rest_framework.parsers import JSONParser
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from .serializers import CustomerSerializer
-
 
 from .models import Customer 
 # Create your views here.
@@ -18,19 +15,13 @@ def CustomerHomeView(request):
 @csrf_exempt
 def CreateCustomer(request):
     if request.method == 'POST':
-        print(" data is :",request.POST)
-    print("madala");
-    print(request.POST.get('Customer.name'));
-    print("salman");
-    customer = request
-    # Customer.objects.create(
-    #     name = request.POST.get('customer.name'),
-    #     type = request.POST.get('type'),
-    #     phone = request.POST.get('phone'),
-    #     address= request.POST.get('address')
-    # )
-    context = {'customer': customer}
-    return HttpResponse("context")
+        # print(JSONParser().parse(request))  # just print the data on console
+        customer_data=JSONParser().parse(request)
+        customer_serializer = CustomerSerializer(data=customer_data)
+        if customer_serializer.is_valid():
+            customer_serializer.save()
+            return JsonResponse("Added Successfully!!" , safe=False)
+        return JsonResponse("Failed to Add.",safe=False)
 
 @api_view(['GET'])
 def GetAllCustomers(request):
@@ -39,15 +30,34 @@ def GetAllCustomers(request):
     context= {'customers': customers.data}
     return JsonResponse(context)
 
+@csrf_exempt
 def UpdateCustomer(request,id):
-    customer1 = request.POST.get('customer')
-    customer = Customer.objects.get(id=int(id))
-    customer.name(customer1.name)
-    customer.phone(customer1.phone)
-    customer.save()
-    context= {'customer': customer}
-    return render(request,'customer updated successfully',context)
+    if request.method == 'POST':     
+        customer_data=JSONParser().parse(request)
+        customer = Customer.objects.get(id=int(id))
+        customer_serializer = CustomerSerializer(customer,data=customer_data)
+        if customer_serializer.is_valid():
+            customer_serializer.save()
+            context= {'customer': customer_serializer.data}
+            return JsonResponse(context)
+        return JsonResponse("Failed to Updated.",safe=False)
 
+    # ---------------anothe way WithOut using serializers ---------------
+    # ------not that much prefer because if we have edit more fields it will be difficult---
+    # if request.method == 'POST':   
+    #     customer_data=JSONParser().parse(request)
+    #     customer = Customer.objects.get(id=int(id))
+    #     customer.name = customer_data['name']
+    #     customer.type = customer_data['type']
+    #     customer.phone = customer_data['phone']
+    #     customer.address = customer_data['address']
+    #     customer.save();
+    #     return JsonResponse('customer updated successfully', safe=False);
+    # else:
+    #     return JsonResponse('updation failure', safe=False);
+
+@csrf_exempt
 def DeleteCustomer(request,id):
-    Customer.objects.delete(id =int(id))
-    return HttpResponse('customer deleted successfully')
+    customer = Customer.objects.get(id =int(id))
+    customer.delete()
+    return JsonResponse('customer deleted successfully',safe=False)

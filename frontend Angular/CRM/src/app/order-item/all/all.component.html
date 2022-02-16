@@ -1,1 +1,102 @@
-<p>all works!</p>
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="btn btn-outline-primary" title="New Customer" routerLink="/orderItem/new"><i
+        class="fas fa-user-plus"></i> </span>
+    <span class="navbar-brand mb-0 h1" style="color:rgb(55, 138, 194)">All Order Items</span>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="table-responsive">
+  <table class="table table-hover ">
+    <thead>
+      <tr>
+        <th scope="col">orderId</th>
+        <th scope="col">productId</th>
+        <th scope="col">quality</th>
+        <th scope="col">itemTotal</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let orderItem of orderItems;let i = index">
+        <!-- <th scope="row">
+          <div *ngIf="!orderItem.isEdit">
+            <span *ngFor = " let customer of customers ">
+              <span *ngIf = " customer.id ==  orderItem.customerId"> {{customer.orderId}}</span> 
+            </span>
+          </div>
+          <div *ngIf="orderItem.isEdit">
+            <select class="form-select" id="inputGroupSelect01" [(ngModel)]="newOderItem.customerId">
+              <option *ngFor="let customer of customers" [value]="customer.id">{{customer.name}}</option>
+          </select>
+          </div>
+
+        </th>
+        <td>
+          <div *ngIf="!orderItem.isEdit">{{orderItem.orderDate}}</div>
+          <div *ngIf="orderItem.isEdit">
+            <input type="date" name="name" placeholder="orderDate" class="form-control" [(ngModel)]="newOderItem.productId">
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!orderItem.isEdit">{{orderItem.contact_phone}}</div>
+          <div *ngIf="orderItem.isEdit">
+            <input type="text" name="name"  placeholder="contact_phone" class="form-control" [(ngModel)]="newOderItem.contact_phone">
+          </div>
+        </td>
+
+        <td>
+          <div *ngIf="!orderItem.isEdit">{{orderItem.orderTotal}}</div>
+          <div *ngIf="orderItem.isEdit">
+            <input type="text" name="phone"  placeholder="orderTotal" class="form-control" [(ngModel)]="newOderItem.orderTotal">
+          </div>
+        </td> -->
+
+        <td>
+          <div>{{orderItem.orderId}}</div>
+        </td>
+        <td>
+          <div>{{orderItem.productId}}</div>
+        </td>
+
+        <td>
+          <div>{{orderItem.quality}}</div>
+        </td>
+        <td>
+          <div>{{orderItem.itemTotal}}</div>
+        </td>
+
+        <td>
+           
+          <div *ngIf="orderItem.isEdit">
+            <span style="color: blue;margin-right:20px;cursor: pointer;" title="Save" (click)="save(newOrderItem,orderItem.id)"><i
+                class="fas fa-check"></i></span>
+            <span style="color:red;cursor: pointer;" title="Cancel" (click)="cancel(orderItem)"><i
+                class="fas fa-times"></i></span>
+          </div>
+
+          <div *ngIf="!orderItem.isEdit">
+            <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" (click)="update(orderItem)"><i
+                class="fas fa-user-edit"></i></span>
+            <span style="color:red;cursor: pointer;" title="Delete" (click)="delete(orderItem.id)"><i class="fas fa-trash"></i></span>
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+</div>

@@ -4,9 +4,9 @@ from Customer.models import CRMObjectType
 # Create your models here.
 
 class Product(models.Model):
-    units = models.CharField(max_length=50,null=False)
     name = models.CharField(max_length=64,null=False)
     price = models.FloatField(null=False)
+    units = models.IntegerField(null=False)
     
     class Meta:
         db_table= 'Product'
@@ -14,8 +14,10 @@ class Product(models.Model):
             '-id'
         ]
     
-    def CustomerOrder(self):
+    def __str__(self):
+        return self.name
+
+    def Product(self):
         super(CRMObjectType.PRODUCT)
     
-    def __init__(self):
-        return self.name;
+    

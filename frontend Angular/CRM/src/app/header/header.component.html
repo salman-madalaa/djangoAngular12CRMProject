@@ -1,7 +1,20 @@
-<nav class="navbar sticky-top navbar-dark bg-primary">
+<nav class="navbar fixed-top navbar-dark bg-primary">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1"> <i class="fal fa-bars" style="padding-right: 10px;cursor:pointer;"></i>  CRM</span>
-    <span class="navbar-brand mb-0 h1"> <i class="fas fa-sign-out"></i> Logout</span>
+    <span class="navbar-brand mb-0 h1" style="cursor: pointer;" > <i class="fal fa-bars" style="padding-right: 10px;" data-bs-toggle="offcanvas" href="#offcanvasExample"></i> <span routerLink="/home">CRM</span></span>
+    <span class="navbar-brand mb-0 h1" style="cursor: pointer;"> <i class="fas fa-sign-out"></i> Logout</span>
 
   </div>
 </nav>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+ 
+  <div class="offcanvas-header">
+    <h3 class="offcanvas-title" id="offcanvasExampleLabel">Navigation</h3>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  
+  <div class="app-sidenav">
+    <app-navigation></app-navigation>
+  </div>
+</div>  

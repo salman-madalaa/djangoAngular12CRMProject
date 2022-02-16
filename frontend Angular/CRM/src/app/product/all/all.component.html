@@ -1,1 +1,75 @@
-<p>all works!</p>
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="btn btn-outline-primary" title="New Customer" routerLink="/product/new"><i
+          class="fas fa-user-plus"></i> </span>
+      <span class="navbar-brand mb-0 h1" style="color:rgb(55, 138, 194)">All Products</span>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div class="table-responsive">
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Units</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products;let i = index">
+          <td>
+            <div *ngIf="!product.isEdit">{{product.name}}</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" name="name"  placeholder="name" class="form-control" [(ngModel)]="newProduct.name">
+            </div>
+          </td>
+          <td>
+            <div *ngIf="!product.isEdit">{{product.price}}</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" name="name"  placeholder="price" class="form-control" [(ngModel)]="newProduct.price">
+            </div>
+          </td>
+  
+          <td>
+            <div *ngIf="!product.isEdit">{{product.units}}</div>
+            <div *ngIf="product.isEdit">
+              <input type="text" name="name"  placeholder="units" class="form-control" [(ngModel)]="newProduct.units">
+            </div>
+          </td>
+         
+  
+          <td>
+             
+            <div *ngIf="product.isEdit">
+              <span style="color: blue;margin-right:20px;cursor: pointer;" title="Save" (click)="save(newProduct,product.id)"><i
+                  class="fas fa-check"></i></span>
+              <span style="color:red;cursor: pointer;" title="Cancel" (click)="cancel(product)"><i
+                  class="fas fa-times"></i></span>
+            </div>
+  
+            <div *ngIf="!product.isEdit">
+              <span style="color: blue;margin-right:20px;cursor: pointer;" title="Edit" (click)="update(product)"><i
+                  class="fas fa-user-edit"></i></span>
+              <span style="color:red;cursor: pointer;" title="Delete" (click)="delete(product.id)"><i class="fas fa-trash"></i></span>
+            </div>
+  
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <mat-paginator [length]="totalCount"
+              [pageSize]="10"
+              [pageIndex]="0"
+              [showFirstLastButtons]="true" 
+              [pageSizeOptions]="[2, 5, 10, 25, 100]"
+              (page)="updateTableResults($event)"
+              >
+</mat-paginator>
+
+  </div>
+  

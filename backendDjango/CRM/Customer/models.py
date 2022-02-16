@@ -16,7 +16,7 @@ class Customer(models.Model):
     
     CustomerType = (
         ('WHOLESALE','WHOLESALE'),
-        ('RETAILER,','RETAILER')
+        ('RETAILER','RETAILER')
     )
     
     name = models.CharField(max_length=255,blank=False)

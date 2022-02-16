@@ -1,1 +1,31 @@
-<p>new works!</p>
+
+<h1 style="text-align: center;">New Order Item</h1>
+
+<div class="container">
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">orderId</span>
+    </div>
+
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="inputGroupSelect01">Product</label>
+      <select class="form-select" id="inputGroupSelect01" [(ngModel)]="orderItem.productId">
+        <option value="" [selected]="true">Choose...</option>
+        <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+    </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Quality</span>
+      <input type="text" class="form-control" placeholder="quality" [(ngModel)]="orderItem.quality"
+        aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text">Item Total</span>
+      <input type="text" class="form-control" placeholder="Item Total" [(ngModel)]="orderItem.itemTotal">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-primary" style="display:flex;justify-content: center;" (click)="create(orderItem)">Submit</button>
+
+</div> 

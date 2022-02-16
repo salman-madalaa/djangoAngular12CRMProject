@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { AllComponent } from './all/all.component';
 import { NewComponent } from './new/new.component';
 import { ProductRoutingModule } from './product-routing.module';
+import { FormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -13,7 +15,9 @@ import { ProductRoutingModule } from './product-routing.module';
   ],
   imports: [
     CommonModule,
-    ProductRoutingModule
+    FormsModule,
+    ProductRoutingModule,
+    MatPaginatorModule
   ]
 })
 export class ProductModule { }
